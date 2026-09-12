@@ -3609,9 +3609,7 @@
             const esc = (v) => { const s = String(v ?? ''); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
             const filename = `SoilGuard-Riwayat-${new Date().toISOString().slice(0,10)}.csv`;
             // REVISI v3.6.2: CSV bahasa Indonesia murni
-            let csv = (ID
-                ? "Tanggal,Waktu,Lokasi,Sumber Data,Skor,Status,Tanaman Terbaik,Parameter Aktif,Temp(C),Kelembaban(%),EC(uS/cm),pH,N(mg/kg),P(mg/kg),K(mg/kg)"
-                : "Date,Time,Location,Data Source,Score,Status,Best Plant,Active Parameters,Temp(C),Moisture(%),EC(uS/cm),pH,N(mg/kg),P(mg/kg),K(mg/kg)") + "\n";
+            let csv = "Tanggal,Waktu,Lokasi,Sumber Data,Skor,Status,Tanaman Terbaik,Parameter Aktif,Temp(C),Kelembaban(%),EC(uS/cm),pH,N(mg/kg),P(mg/kg),K(mg/kg)\n";
             const rows = [...historyData].reverse(); // urut kronologis
             rows.forEach(e => {
                 const d = new Date(e.date);
