@@ -1,0 +1,512 @@
+id,nama,kategori,parameter,rentang_saat_ini,sumber(buku/jurnal/FAO EcoCrop),halaman_atau_URL,status(lit/est)
+28,"Kale","Sayuran","pH","6 - 7.2",,,est
+28,"Kale","Sayuran","Suhu (°C)","15 - 24",,,est
+28,"Kale","Sayuran","Kelembaban (%)","50 - 75",,,est
+28,"Kale","Sayuran","EC (µS/cm)","700 - 2100",,,est
+28,"Kale","Sayuran","Nitrogen (mg/kg)","100 - 260",,,est
+28,"Kale","Sayuran","Fosfor (mg/kg)","35 - 100",,,est
+28,"Kale","Sayuran","Kalium (mg/kg)","150 - 330",,,est
+29,"Kailan","Sayuran","pH","6 - 7",,,est
+29,"Kailan","Sayuran","Suhu (°C)","15 - 26",,,est
+29,"Kailan","Sayuran","Kelembaban (%)","50 - 75",,,est
+29,"Kailan","Sayuran","EC (µS/cm)","700 - 2000",,,est
+29,"Kailan","Sayuran","Nitrogen (mg/kg)","95 - 240",,,est
+29,"Kailan","Sayuran","Fosfor (mg/kg)","35 - 95",,,est
+29,"Kailan","Sayuran","Kalium (mg/kg)","140 - 320",,,est
+30,"Kol Bunga","Sayuran","pH","6 - 7",,,est
+30,"Kol Bunga","Sayuran","Suhu (°C)","15 - 23",,,est
+30,"Kol Bunga","Sayuran","Kelembaban (%)","50 - 75",,,est
+30,"Kol Bunga","Sayuran","EC (µS/cm)","700 - 2050",,,est
+30,"Kol Bunga","Sayuran","Nitrogen (mg/kg)","100 - 250",,,est
+30,"Kol Bunga","Sayuran","Fosfor (mg/kg)","35 - 98",,,est
+30,"Kol Bunga","Sayuran","Kalium (mg/kg)","145 - 320",,,est
+31,"Seledri","Sayuran","pH","6 - 7",,,est
+31,"Seledri","Sayuran","Suhu (°C)","15 - 24",,,est
+31,"Seledri","Sayuran","Kelembaban (%)","55 - 80",,,est
+31,"Seledri","Sayuran","EC (µS/cm)","750 - 2000",,,est
+31,"Seledri","Sayuran","Nitrogen (mg/kg)","90 - 240",,,est
+31,"Seledri","Sayuran","Fosfor (mg/kg)","30 - 95",,,est
+31,"Seledri","Sayuran","Kalium (mg/kg)","140 - 320",,,est
+32,"Peterseli","Sayuran","pH","6 - 7",,,est
+32,"Peterseli","Sayuran","Suhu (°C)","15 - 25",,,est
+32,"Peterseli","Sayuran","Kelembaban (%)","45 - 70",,,est
+32,"Peterseli","Sayuran","EC (µS/cm)","650 - 1800",,,est
+32,"Peterseli","Sayuran","Nitrogen (mg/kg)","80 - 210",,,est
+32,"Peterseli","Sayuran","Fosfor (mg/kg)","30 - 85",,,est
+32,"Peterseli","Sayuran","Kalium (mg/kg)","130 - 290",,,est
+33,"Arugula","Sayuran","pH","6 - 7",,,est
+33,"Arugula","Sayuran","Suhu (°C)","15 - 26",,,est
+33,"Arugula","Sayuran","Kelembaban (%)","45 - 70",,,est
+33,"Arugula","Sayuran","EC (µS/cm)","650 - 1900",,,est
+33,"Arugula","Sayuran","Nitrogen (mg/kg)","85 - 220",,,est
+33,"Arugula","Sayuran","Fosfor (mg/kg)","30 - 88",,,est
+33,"Arugula","Sayuran","Kalium (mg/kg)","130 - 300",,,est
+34,"Zucchini","Sayuran","pH","5.8 - 7",,,est
+34,"Zucchini","Sayuran","Suhu (°C)","20 - 30",,,est
+34,"Zucchini","Sayuran","Kelembaban (%)","50 - 78",,,est
+34,"Zucchini","Sayuran","EC (µS/cm)","900 - 2400",,,est
+34,"Zucchini","Sayuran","Nitrogen (mg/kg)","110 - 280",,,est
+34,"Zucchini","Sayuran","Fosfor (mg/kg)","40 - 110",,,est
+34,"Zucchini","Sayuran","Kalium (mg/kg)","160 - 380",,,est
+35,"Okra (Labia)","Sayuran","pH","5.8 - 7",,,est
+35,"Okra (Labia)","Sayuran","Suhu (°C)","24 - 33",,,est
+35,"Okra (Labia)","Sayuran","Kelembaban (%)","45 - 72",,,est
+35,"Okra (Labia)","Sayuran","EC (µS/cm)","800 - 2200",,,est
+35,"Okra (Labia)","Sayuran","Nitrogen (mg/kg)","90 - 240",,,est
+35,"Okra (Labia)","Sayuran","Fosfor (mg/kg)","35 - 100",,,est
+35,"Okra (Labia)","Sayuran","Kalium (mg/kg)","150 - 350",,,est
+36,"Labu Siam","Sayuran","pH","5.5 - 7",,,est
+36,"Labu Siam","Sayuran","Suhu (°C)","20 - 30",,,est
+36,"Labu Siam","Sayuran","Kelembaban (%)","45 - 75",,,est
+36,"Labu Siam","Sayuran","EC (µS/cm)","750 - 2100",,,est
+36,"Labu Siam","Sayuran","Nitrogen (mg/kg)","90 - 240",,,est
+36,"Labu Siam","Sayuran","Fosfor (mg/kg)","35 - 100",,,est
+36,"Labu Siam","Sayuran","Kalium (mg/kg)","150 - 350",,,est
+37,"Labu Kuning","Sayuran","pH","5.8 - 7",,,est
+37,"Labu Kuning","Sayuran","Suhu (°C)","21 - 31",,,est
+37,"Labu Kuning","Sayuran","Kelembaban (%)","48 - 76",,,est
+37,"Labu Kuning","Sayuran","EC (µS/cm)","780 - 2150",,,est
+37,"Labu Kuning","Sayuran","Nitrogen (mg/kg)","92 - 245",,,est
+37,"Labu Kuning","Sayuran","Fosfor (mg/kg)","34 - 102",,,est
+37,"Labu Kuning","Sayuran","Kalium (mg/kg)","152 - 370",,,est
+38,"Oyong","Sayuran","pH","5.8 - 7",,,est
+38,"Oyong","Sayuran","Suhu (°C)","22 - 32",,,est
+38,"Oyong","Sayuran","Kelembaban (%)","50 - 78",,,est
+38,"Oyong","Sayuran","EC (µS/cm)","750 - 2100",,,est
+38,"Oyong","Sayuran","Nitrogen (mg/kg)","90 - 240",,,est
+38,"Oyong","Sayuran","Fosfor (mg/kg)","35 - 100",,,est
+38,"Oyong","Sayuran","Kalium (mg/kg)","150 - 350",,,est
+39,"Paria","Sayuran","pH","5.5 - 6.8",,,est
+39,"Paria","Sayuran","Suhu (°C)","22 - 33",,,est
+39,"Paria","Sayuran","Kelembaban (%)","45 - 75",,,est
+39,"Paria","Sayuran","EC (µS/cm)","800 - 2200",,,est
+39,"Paria","Sayuran","Nitrogen (mg/kg)","95 - 250",,,est
+39,"Paria","Sayuran","Fosfor (mg/kg)","35 - 105",,,est
+39,"Paria","Sayuran","Kalium (mg/kg)","150 - 360",,,est
+40,"Tomat Ceri","Sayuran","pH","5.5 - 6.8",,,est
+40,"Tomat Ceri","Sayuran","Suhu (°C)","18 - 29",,,est
+40,"Tomat Ceri","Sayuran","Kelembaban (%)","45 - 72",,,est
+40,"Tomat Ceri","Sayuran","EC (µS/cm)","900 - 2600",,,est
+40,"Tomat Ceri","Sayuran","Nitrogen (mg/kg)","110 - 300",,,est
+40,"Tomat Ceri","Sayuran","Fosfor (mg/kg)","40 - 120",,,est
+40,"Tomat Ceri","Sayuran","Kalium (mg/kg)","170 - 400",,,est
+41,"Cabai Rawit","Sayuran","pH","5.5 - 6.8",,,est
+41,"Cabai Rawit","Sayuran","Suhu (°C)","21 - 33",,,est
+41,"Cabai Rawit","Sayuran","Kelembaban (%)","40 - 68",,,est
+41,"Cabai Rawit","Sayuran","EC (µS/cm)","950 - 2800",,,est
+41,"Cabai Rawit","Sayuran","Nitrogen (mg/kg)","130 - 330",,,est
+41,"Cabai Rawit","Sayuran","Fosfor (mg/kg)","45 - 135",,,est
+41,"Cabai Rawit","Sayuran","Kalium (mg/kg)","180 - 430",,,est
+42,"Bligo (Labu Putih)","Sayuran","pH","5.8 - 7",,,est
+42,"Bligo (Labu Putih)","Sayuran","Suhu (°C)","22 - 33",,,est
+42,"Bligo (Labu Putih)","Sayuran","Kelembaban (%)","50 - 78",,,est
+42,"Bligo (Labu Putih)","Sayuran","EC (µS/cm)","800 - 2200",,,est
+42,"Bligo (Labu Putih)","Sayuran","Nitrogen (mg/kg)","95 - 250",,,est
+42,"Bligo (Labu Putih)","Sayuran","Fosfor (mg/kg)","35 - 105",,,est
+42,"Bligo (Labu Putih)","Sayuran","Kalium (mg/kg)","160 - 380",,,est
+43,"Asparagus","Sayuran","pH","6 - 7.5",,,est
+43,"Asparagus","Sayuran","Suhu (°C)","16 - 27",,,est
+43,"Asparagus","Sayuran","Kelembaban (%)","45 - 70",,,est
+43,"Asparagus","Sayuran","EC (µS/cm)","750 - 2000",,,est
+43,"Asparagus","Sayuran","Nitrogen (mg/kg)","85 - 220",,,est
+43,"Asparagus","Sayuran","Fosfor (mg/kg)","35 - 95",,,est
+43,"Asparagus","Sayuran","Kalium (mg/kg)","150 - 340",,,est
+44,"Daun Katuk","Sayuran","pH","5.5 - 6.8",,,est
+44,"Daun Katuk","Sayuran","Suhu (°C)","22 - 32",,,est
+44,"Daun Katuk","Sayuran","Kelembaban (%)","50 - 80",,,est
+44,"Daun Katuk","Sayuran","EC (µS/cm)","700 - 1900",,,est
+44,"Daun Katuk","Sayuran","Nitrogen (mg/kg)","85 - 230",,,est
+44,"Daun Katuk","Sayuran","Fosfor (mg/kg)","30 - 92",,,est
+44,"Daun Katuk","Sayuran","Kalium (mg/kg)","140 - 330",,,est
+45,"Daun Kelor","Sayuran","pH","5.5 - 7.5",,,est
+45,"Daun Kelor","Sayuran","Suhu (°C)","20 - 35",,,est
+45,"Daun Kelor","Sayuran","Kelembaban (%)","35 - 65",,,est
+45,"Daun Kelor","Sayuran","EC (µS/cm)","550 - 1700",,,est
+45,"Daun Kelor","Sayuran","Nitrogen (mg/kg)","70 - 200",,,est
+45,"Daun Kelor","Sayuran","Fosfor (mg/kg)","25 - 85",,,est
+45,"Daun Kelor","Sayuran","Kalium (mg/kg)","120 - 300",,,est
+46,"Buncis","Kacang","pH","5.8 - 7",,,est
+46,"Buncis","Kacang","Suhu (°C)","16 - 27",,,est
+46,"Buncis","Kacang","Kelembaban (%)","45 - 70",,,est
+46,"Buncis","Kacang","EC (µS/cm)","700 - 1900",,,est
+46,"Buncis","Kacang","Nitrogen (mg/kg)","70 - 190",,,est
+46,"Buncis","Kacang","Fosfor (mg/kg)","30 - 90",,,est
+46,"Buncis","Kacang","Kalium (mg/kg)","130 - 300",,,est
+47,"Kacang Panjang","Kacang","pH","5.5 - 7",,,est
+47,"Kacang Panjang","Kacang","Suhu (°C)","22 - 33",,,est
+47,"Kacang Panjang","Kacang","Kelembaban (%)","45 - 72",,,est
+47,"Kacang Panjang","Kacang","EC (µS/cm)","650 - 1900",,,est
+47,"Kacang Panjang","Kacang","Nitrogen (mg/kg)","70 - 200",,,est
+47,"Kacang Panjang","Kacang","Fosfor (mg/kg)","30 - 92",,,est
+47,"Kacang Panjang","Kacang","Kalium (mg/kg)","140 - 310",,,est
+48,"Kentang","Umbi","pH","5 - 6.5",,,est
+48,"Kentang","Umbi","Suhu (°C)","15 - 25",,,est
+48,"Kentang","Umbi","Kelembaban (%)","55 - 75",,,est
+48,"Kentang","Umbi","EC (µS/cm)","900 - 2200",,,est
+48,"Kentang","Umbi","Nitrogen (mg/kg)","120 - 300",,,est
+48,"Kentang","Umbi","Fosfor (mg/kg)","40 - 110",,,est
+48,"Kentang","Umbi","Kalium (mg/kg)","180 - 400",,,est
+49,"Ubi Jalar","Umbi","pH","5.5 - 6.5",,,est
+49,"Ubi Jalar","Umbi","Suhu (°C)","20 - 32",,,est
+49,"Ubi Jalar","Umbi","Kelembaban (%)","50 - 75",,,est
+49,"Ubi Jalar","Umbi","EC (µS/cm)","700 - 2000",,,est
+49,"Ubi Jalar","Umbi","Nitrogen (mg/kg)","80 - 220",,,est
+49,"Ubi Jalar","Umbi","Fosfor (mg/kg)","30 - 95",,,est
+49,"Ubi Jalar","Umbi","Kalium (mg/kg)","150 - 350",,,est
+50,"Singkong","Umbi","pH","4.5 - 7",,,est
+50,"Singkong","Umbi","Suhu (°C)","22 - 35",,,est
+50,"Singkong","Umbi","Kelembaban (%)","40 - 70",,,est
+50,"Singkong","Umbi","EC (µS/cm)","500 - 1600",,,est
+50,"Singkong","Umbi","Nitrogen (mg/kg)","60 - 180",,,est
+50,"Singkong","Umbi","Fosfor (mg/kg)","25 - 80",,,est
+50,"Singkong","Umbi","Kalium (mg/kg)","120 - 300",,,est
+51,"Bawang Merah","Umbi","pH","5.5 - 6.8",,,est
+51,"Bawang Merah","Umbi","Suhu (°C)","18 - 28",,,est
+51,"Bawang Merah","Umbi","Kelembaban (%)","40 - 65",,,est
+51,"Bawang Merah","Umbi","EC (µS/cm)","900 - 2300",,,est
+51,"Bawang Merah","Umbi","Nitrogen (mg/kg)","100 - 260",,,est
+51,"Bawang Merah","Umbi","Fosfor (mg/kg)","35 - 100",,,est
+51,"Bawang Merah","Umbi","Kalium (mg/kg)","150 - 360",,,est
+52,"Bawang Putih","Umbi","pH","5.5 - 7",,,est
+52,"Bawang Putih","Umbi","Suhu (°C)","15 - 27",,,est
+52,"Bawang Putih","Umbi","Kelembaban (%)","40 - 65",,,est
+52,"Bawang Putih","Umbi","EC (µS/cm)","900 - 2200",,,est
+52,"Bawang Putih","Umbi","Nitrogen (mg/kg)","90 - 240",,,est
+52,"Bawang Putih","Umbi","Fosfor (mg/kg)","35 - 95",,,est
+52,"Bawang Putih","Umbi","Kalium (mg/kg)","140 - 340",,,est
+53,"Bit Merah","Umbi","pH","6 - 7",,,est
+53,"Bit Merah","Umbi","Suhu (°C)","15 - 25",,,est
+53,"Bit Merah","Umbi","Kelembaban (%)","45 - 75",,,est
+53,"Bit Merah","Umbi","EC (µS/cm)","800 - 2200",,,est
+53,"Bit Merah","Umbi","Nitrogen (mg/kg)","80 - 220",,,est
+53,"Bit Merah","Umbi","Fosfor (mg/kg)","30 - 95",,,est
+53,"Bit Merah","Umbi","Kalium (mg/kg)","160 - 380",,,est
+54,"Lengkuas","Umbi","pH","5.5 - 7",,,est
+54,"Lengkuas","Umbi","Suhu (°C)","22 - 32",,,est
+54,"Lengkuas","Umbi","Kelembaban (%)","45 - 70",,,est
+54,"Lengkuas","Umbi","EC (µS/cm)","700 - 1900",,,est
+54,"Lengkuas","Umbi","Nitrogen (mg/kg)","70 - 200",,,est
+54,"Lengkuas","Umbi","Fosfor (mg/kg)","30 - 85",,,est
+54,"Lengkuas","Umbi","Kalium (mg/kg)","130 - 300",,,est
+55,"Kencur","Umbi","pH","5.5 - 7",,,est
+55,"Kencur","Umbi","Suhu (°C)","22 - 31",,,est
+55,"Kencur","Umbi","Kelembaban (%)","40 - 68",,,est
+55,"Kencur","Umbi","EC (µS/cm)","700 - 1800",,,est
+55,"Kencur","Umbi","Nitrogen (mg/kg)","70 - 190",,,est
+55,"Kencur","Umbi","Fosfor (mg/kg)","30 - 80",,,est
+55,"Kencur","Umbi","Kalium (mg/kg)","120 - 280",,,est
+56,"Daikon (Lobak Putih)","Umbi","pH","5.8 - 7",,,est
+56,"Daikon (Lobak Putih)","Umbi","Suhu (°C)","15 - 25",,,est
+56,"Daikon (Lobak Putih)","Umbi","Kelembaban (%)","45 - 72",,,est
+56,"Daikon (Lobak Putih)","Umbi","EC (µS/cm)","650 - 1900",,,est
+56,"Daikon (Lobak Putih)","Umbi","Nitrogen (mg/kg)","70 - 190",,,est
+56,"Daikon (Lobak Putih)","Umbi","Fosfor (mg/kg)","30 - 88",,,est
+56,"Daikon (Lobak Putih)","Umbi","Kalium (mg/kg)","140 - 290",,,est
+57,"Talas (Keladi)","Umbi","pH","5.5 - 7",,,est
+57,"Talas (Keladi)","Umbi","Suhu (°C)","22 - 32",,,est
+57,"Talas (Keladi)","Umbi","Kelembaban (%)","55 - 80",,,est
+57,"Talas (Keladi)","Umbi","EC (µS/cm)","700 - 1900",,,est
+57,"Talas (Keladi)","Umbi","Nitrogen (mg/kg)","80 - 210",,,est
+57,"Talas (Keladi)","Umbi","Fosfor (mg/kg)","30 - 90",,,est
+57,"Talas (Keladi)","Umbi","Kalium (mg/kg)","140 - 320",,,est
+58,"Temu Lawak","Umbi","pH","5.5 - 7",,,est
+58,"Temu Lawak","Umbi","Suhu (°C)","22 - 32",,,est
+58,"Temu Lawak","Umbi","Kelembaban (%)","45 - 72",,,est
+58,"Temu Lawak","Umbi","EC (µS/cm)","700 - 1900",,,est
+58,"Temu Lawak","Umbi","Nitrogen (mg/kg)","75 - 205",,,est
+58,"Temu Lawak","Umbi","Fosfor (mg/kg)","30 - 88",,,est
+58,"Temu Lawak","Umbi","Kalium (mg/kg)","135 - 300",,,est
+59,"Kacang Hijau","Kacang","pH","5.5 - 7",,,est
+59,"Kacang Hijau","Kacang","Suhu (°C)","25 - 33",,,est
+59,"Kacang Hijau","Kacang","Kelembaban (%)","40 - 65",,,est
+59,"Kacang Hijau","Kacang","EC (µS/cm)","500 - 1600",,,est
+59,"Kacang Hijau","Kacang","Nitrogen (mg/kg)","60 - 180",,,est
+59,"Kacang Hijau","Kacang","Fosfor (mg/kg)","25 - 85",,,est
+59,"Kacang Hijau","Kacang","Kalium (mg/kg)","120 - 300",,,est
+60,"Kacang Tanah","Kacang","pH","5.5 - 6.5",,,est
+60,"Kacang Tanah","Kacang","Suhu (°C)","22 - 32",,,est
+60,"Kacang Tanah","Kacang","Kelembaban (%)","40 - 70",,,est
+60,"Kacang Tanah","Kacang","EC (µS/cm)","600 - 1800",,,est
+60,"Kacang Tanah","Kacang","Nitrogen (mg/kg)","60 - 190",,,est
+60,"Kacang Tanah","Kacang","Fosfor (mg/kg)","30 - 95",,,est
+60,"Kacang Tanah","Kacang","Kalium (mg/kg)","130 - 320",,,est
+61,"Kedelai","Kacang","pH","5.5 - 7",,,est
+61,"Kedelai","Kacang","Suhu (°C)","20 - 30",,,est
+61,"Kedelai","Kacang","Kelembaban (%)","45 - 70",,,est
+61,"Kedelai","Kacang","EC (µS/cm)","700 - 2000",,,est
+61,"Kedelai","Kacang","Nitrogen (mg/kg)","70 - 200",,,est
+61,"Kedelai","Kacang","Fosfor (mg/kg)","30 - 95",,,est
+61,"Kedelai","Kacang","Kalium (mg/kg)","140 - 330",,,est
+62,"Kacang Merah","Kacang","pH","5.8 - 7",,,est
+62,"Kacang Merah","Kacang","Suhu (°C)","18 - 28",,,est
+62,"Kacang Merah","Kacang","Kelembaban (%)","40 - 68",,,est
+62,"Kacang Merah","Kacang","EC (µS/cm)","650 - 1800",,,est
+62,"Kacang Merah","Kacang","Nitrogen (mg/kg)","70 - 190",,,est
+62,"Kacang Merah","Kacang","Fosfor (mg/kg)","30 - 90",,,est
+62,"Kacang Merah","Kacang","Kalium (mg/kg)","130 - 300",,,est
+63,"Padi (Pot)","Serealia","pH","5.5 - 6.5",,,est
+63,"Padi (Pot)","Serealia","Suhu (°C)","22 - 33",,,est
+63,"Padi (Pot)","Serealia","Kelembaban (%)","70 - 95",,,est
+63,"Padi (Pot)","Serealia","EC (µS/cm)","700 - 2000",,,est
+63,"Padi (Pot)","Serealia","Nitrogen (mg/kg)","90 - 260",,,est
+63,"Padi (Pot)","Serealia","Fosfor (mg/kg)","30 - 100",,,est
+63,"Padi (Pot)","Serealia","Kalium (mg/kg)","150 - 380",,,est
+64,"Gandum (Dataran Tinggi)","Serealia","pH","6 - 7",,,est
+64,"Gandum (Dataran Tinggi)","Serealia","Suhu (°C)","13 - 24",,,est
+64,"Gandum (Dataran Tinggi)","Serealia","Kelembaban (%)","45 - 70",,,est
+64,"Gandum (Dataran Tinggi)","Serealia","EC (µS/cm)","700 - 1900",,,est
+64,"Gandum (Dataran Tinggi)","Serealia","Nitrogen (mg/kg)","85 - 225",,,est
+64,"Gandum (Dataran Tinggi)","Serealia","Fosfor (mg/kg)","30 - 92",,,est
+64,"Gandum (Dataran Tinggi)","Serealia","Kalium (mg/kg)","140 - 330",,,est
+65,"Quinoa","Serealia","pH","6 - 7.5",,,est
+65,"Quinoa","Serealia","Suhu (°C)","15 - 25",,,est
+65,"Quinoa","Serealia","Kelembaban (%)","40 - 68",,,est
+65,"Quinoa","Serealia","EC (µS/cm)","650 - 1800",,,est
+65,"Quinoa","Serealia","Nitrogen (mg/kg)","75 - 205",,,est
+65,"Quinoa","Serealia","Fosfor (mg/kg)","30 - 90",,,est
+65,"Quinoa","Serealia","Kalium (mg/kg)","130 - 300",,,est
+66,"Pepaya","Buah","pH","6 - 7",,,est
+66,"Pepaya","Buah","Suhu (°C)","22 - 33",,,est
+66,"Pepaya","Buah","Kelembaban (%)","45 - 75",,,est
+66,"Pepaya","Buah","EC (µS/cm)","800 - 2300",,,est
+66,"Pepaya","Buah","Nitrogen (mg/kg)","100 - 260",,,est
+66,"Pepaya","Buah","Fosfor (mg/kg)","35 - 105",,,est
+66,"Pepaya","Buah","Kalium (mg/kg)","160 - 380",,,est
+67,"Pisang (Pot)","Buah","pH","5.5 - 7",,,est
+67,"Pisang (Pot)","Buah","Suhu (°C)","24 - 33",,,est
+67,"Pisang (Pot)","Buah","Kelembaban (%)","50 - 80",,,est
+67,"Pisang (Pot)","Buah","EC (µS/cm)","800 - 2400",,,est
+67,"Pisang (Pot)","Buah","Nitrogen (mg/kg)","110 - 300",,,est
+67,"Pisang (Pot)","Buah","Fosfor (mg/kg)","35 - 110",,,est
+67,"Pisang (Pot)","Buah","Kalium (mg/kg)","200 - 450",,,est
+68,"Jeruk Lemon","Buah","pH","5.5 - 6.8",,,est
+68,"Jeruk Lemon","Buah","Suhu (°C)","18 - 30",,,est
+68,"Jeruk Lemon","Buah","Kelembaban (%)","45 - 72",,,est
+68,"Jeruk Lemon","Buah","EC (µS/cm)","850 - 2300",,,est
+68,"Jeruk Lemon","Buah","Nitrogen (mg/kg)","95 - 250",,,est
+68,"Jeruk Lemon","Buah","Fosfor (mg/kg)","35 - 100",,,est
+68,"Jeruk Lemon","Buah","Kalium (mg/kg)","160 - 380",,,est
+69,"Jeruk Nipis","Buah","pH","5.5 - 6.8",,,est
+69,"Jeruk Nipis","Buah","Suhu (°C)","20 - 32",,,est
+69,"Jeruk Nipis","Buah","Kelembaban (%)","45 - 72",,,est
+69,"Jeruk Nipis","Buah","EC (µS/cm)","850 - 2300",,,est
+69,"Jeruk Nipis","Buah","Nitrogen (mg/kg)","95 - 250",,,est
+69,"Jeruk Nipis","Buah","Fosfor (mg/kg)","35 - 100",,,est
+69,"Jeruk Nipis","Buah","Kalium (mg/kg)","160 - 380",,,est
+70,"Jeruk Manis","Buah","pH","6 - 7",,,est
+70,"Jeruk Manis","Buah","Suhu (°C)","20 - 32",,,est
+70,"Jeruk Manis","Buah","Kelembaban (%)","45 - 75",,,est
+70,"Jeruk Manis","Buah","EC (µS/cm)","850 - 2400",,,est
+70,"Jeruk Manis","Buah","Nitrogen (mg/kg)","100 - 260",,,est
+70,"Jeruk Manis","Buah","Fosfor (mg/kg)","35 - 105",,,est
+70,"Jeruk Manis","Buah","Kalium (mg/kg)","170 - 400",,,est
+71,"Mangga (Pot)","Buah","pH","5.5 - 7",,,est
+71,"Mangga (Pot)","Buah","Suhu (°C)","24 - 34",,,est
+71,"Mangga (Pot)","Buah","Kelembaban (%)","40 - 70",,,est
+71,"Mangga (Pot)","Buah","EC (µS/cm)","750 - 2200",,,est
+71,"Mangga (Pot)","Buah","Nitrogen (mg/kg)","90 - 240",,,est
+71,"Mangga (Pot)","Buah","Fosfor (mg/kg)","30 - 100",,,est
+71,"Mangga (Pot)","Buah","Kalium (mg/kg)","160 - 380",,,est
+72,"Jambu Biji (Pot)","Buah","pH","5.5 - 7.2",,,est
+72,"Jambu Biji (Pot)","Buah","Suhu (°C)","22 - 34",,,est
+72,"Jambu Biji (Pot)","Buah","Kelembaban (%)","40 - 72",,,est
+72,"Jambu Biji (Pot)","Buah","EC (µS/cm)","750 - 2200",,,est
+72,"Jambu Biji (Pot)","Buah","Nitrogen (mg/kg)","90 - 240",,,est
+72,"Jambu Biji (Pot)","Buah","Fosfor (mg/kg)","30 - 100",,,est
+72,"Jambu Biji (Pot)","Buah","Kalium (mg/kg)","160 - 390",,,est
+73,"Sirsak","Buah","pH","5.5 - 7",,,est
+73,"Sirsak","Buah","Suhu (°C)","22 - 33",,,est
+73,"Sirsak","Buah","Kelembaban (%)","45 - 75",,,est
+73,"Sirsak","Buah","EC (µS/cm)","750 - 2100",,,est
+73,"Sirsak","Buah","Nitrogen (mg/kg)","90 - 240",,,est
+73,"Sirsak","Buah","Fosfor (mg/kg)","30 - 98",,,est
+73,"Sirsak","Buah","Kalium (mg/kg)","160 - 380",,,est
+74,"Markisa","Buah","pH","5.8 - 7",,,est
+74,"Markisa","Buah","Suhu (°C)","20 - 31",,,est
+74,"Markisa","Buah","Kelembaban (%)","45 - 75",,,est
+74,"Markisa","Buah","EC (µS/cm)","800 - 2200",,,est
+74,"Markisa","Buah","Nitrogen (mg/kg)","95 - 250",,,est
+74,"Markisa","Buah","Fosfor (mg/kg)","35 - 105",,,est
+74,"Markisa","Buah","Kalium (mg/kg)","160 - 380",,,est
+75,"Buah Naga","Buah","pH","5.5 - 7",,,est
+75,"Buah Naga","Buah","Suhu (°C)","21 - 34",,,est
+75,"Buah Naga","Buah","Kelembaban (%)","35 - 65",,,est
+75,"Buah Naga","Buah","EC (µS/cm)","650 - 1900",,,est
+75,"Buah Naga","Buah","Nitrogen (mg/kg)","70 - 200",,,est
+75,"Buah Naga","Buah","Fosfor (mg/kg)","30 - 95",,,est
+75,"Buah Naga","Buah","Kalium (mg/kg)","140 - 350",,,est
+76,"Nanas (Pot)","Buah","pH","5 - 6.5",,,est
+76,"Nanas (Pot)","Buah","Suhu (°C)","20 - 32",,,est
+76,"Nanas (Pot)","Buah","Kelembaban (%)","45 - 70",,,est
+76,"Nanas (Pot)","Buah","EC (µS/cm)","650 - 2000",,,est
+76,"Nanas (Pot)","Buah","Nitrogen (mg/kg)","70 - 210",,,est
+76,"Nanas (Pot)","Buah","Fosfor (mg/kg)","25 - 90",,,est
+76,"Nanas (Pot)","Buah","Kalium (mg/kg)","140 - 340",,,est
+77,"Kelengkeng (Pot)","Buah","pH","5.5 - 7",,,est
+77,"Kelengkeng (Pot)","Buah","Suhu (°C)","22 - 33",,,est
+77,"Kelengkeng (Pot)","Buah","Kelembaban (%)","40 - 70",,,est
+77,"Kelengkeng (Pot)","Buah","EC (µS/cm)","750 - 2100",,,est
+77,"Kelengkeng (Pot)","Buah","Nitrogen (mg/kg)","90 - 230",,,est
+77,"Kelengkeng (Pot)","Buah","Fosfor (mg/kg)","30 - 95",,,est
+77,"Kelengkeng (Pot)","Buah","Kalium (mg/kg)","150 - 360",,,est
+78,"Anggur (Pot)","Buah","pH","5.8 - 7.2",,,est
+78,"Anggur (Pot)","Buah","Suhu (°C)","18 - 30",,,est
+78,"Anggur (Pot)","Buah","Kelembaban (%)","45 - 72",,,est
+78,"Anggur (Pot)","Buah","EC (µS/cm)","850 - 2300",,,est
+78,"Anggur (Pot)","Buah","Nitrogen (mg/kg)","95 - 250",,,est
+78,"Anggur (Pot)","Buah","Fosfor (mg/kg)","35 - 105",,,est
+78,"Anggur (Pot)","Buah","Kalium (mg/kg)","160 - 390",,,est
+79,"Delima (Pot)","Buah","pH","5.5 - 7.2",,,est
+79,"Delima (Pot)","Buah","Suhu (°C)","22 - 35",,,est
+79,"Delima (Pot)","Buah","Kelembaban (%)","35 - 65",,,est
+79,"Delima (Pot)","Buah","EC (µS/cm)","650 - 1900",,,est
+79,"Delima (Pot)","Buah","Nitrogen (mg/kg)","70 - 200",,,est
+79,"Delima (Pot)","Buah","Fosfor (mg/kg)","30 - 95",,,est
+79,"Delima (Pot)","Buah","Kalium (mg/kg)","150 - 370",,,est
+80,"Kopi (Pot)","Buah","pH","5.5 - 6.5",,,est
+80,"Kopi (Pot)","Buah","Suhu (°C)","18 - 26",,,est
+80,"Kopi (Pot)","Buah","Kelembaban (%)","50 - 78",,,est
+80,"Kopi (Pot)","Buah","EC (µS/cm)","750 - 2100",,,est
+80,"Kopi (Pot)","Buah","Nitrogen (mg/kg)","90 - 240",,,est
+80,"Kopi (Pot)","Buah","Fosfor (mg/kg)","30 - 95",,,est
+80,"Kopi (Pot)","Buah","Kalium (mg/kg)","150 - 350",,,est
+81,"Teh (Pot)","Rempah","pH","4.5 - 5.5",,,est
+81,"Teh (Pot)","Rempah","Suhu (°C)","18 - 27",,,est
+81,"Teh (Pot)","Rempah","Kelembaban (%)","55 - 80",,,est
+81,"Teh (Pot)","Rempah","EC (µS/cm)","650 - 1900",,,est
+81,"Teh (Pot)","Rempah","Nitrogen (mg/kg)","90 - 240",,,est
+81,"Teh (Pot)","Rempah","Fosfor (mg/kg)","30 - 90",,,est
+81,"Teh (Pot)","Rempah","Kalium (mg/kg)","140 - 330",,,est
+82,"Basil Genovese","Rempah","pH","5.8 - 7",,,est
+82,"Basil Genovese","Rempah","Suhu (°C)","18 - 30",,,est
+82,"Basil Genovese","Rempah","Kelembaban (%)","45 - 72",,,est
+82,"Basil Genovese","Rempah","EC (µS/cm)","700 - 1900",,,est
+82,"Basil Genovese","Rempah","Nitrogen (mg/kg)","80 - 220",,,est
+82,"Basil Genovese","Rempah","Fosfor (mg/kg)","30 - 90",,,est
+82,"Basil Genovese","Rempah","Kalium (mg/kg)","130 - 300",,,est
+83,"Thyme","Rempah","pH","5.5 - 7",,,est
+83,"Thyme","Rempah","Suhu (°C)","15 - 28",,,est
+83,"Thyme","Rempah","Kelembaban (%)","30 - 58",,,est
+83,"Thyme","Rempah","EC (µS/cm)","600 - 1700",,,est
+83,"Thyme","Rempah","Nitrogen (mg/kg)","65 - 180",,,est
+83,"Thyme","Rempah","Fosfor (mg/kg)","28 - 80",,,est
+83,"Thyme","Rempah","Kalium (mg/kg)","120 - 290",,,est
+84,"Sage","Rempah","pH","5.8 - 7",,,est
+84,"Sage","Rempah","Suhu (°C)","15 - 28",,,est
+84,"Sage","Rempah","Kelembaban (%)","32 - 60",,,est
+84,"Sage","Rempah","EC (µS/cm)","600 - 1700",,,est
+84,"Sage","Rempah","Nitrogen (mg/kg)","65 - 185",,,est
+84,"Sage","Rempah","Fosfor (mg/kg)","28 - 80",,,est
+84,"Sage","Rempah","Kalium (mg/kg)","120 - 290",,,est
+85,"Lavender","Rempah","pH","6 - 8",,,est
+85,"Lavender","Rempah","Suhu (°C)","15 - 30",,,est
+85,"Lavender","Rempah","Kelembaban (%)","28 - 55",,,est
+85,"Lavender","Rempah","EC (µS/cm)","550 - 1600",,,est
+85,"Lavender","Rempah","Nitrogen (mg/kg)","55 - 160",,,est
+85,"Lavender","Rempah","Fosfor (mg/kg)","25 - 75",,,est
+85,"Lavender","Rempah","Kalium (mg/kg)","110 - 280",,,est
+86,"Chamomile","Rempah","pH","5.8 - 7.2",,,est
+86,"Chamomile","Rempah","Suhu (°C)","15 - 27",,,est
+86,"Chamomile","Rempah","Kelembaban (%)","38 - 65",,,est
+86,"Chamomile","Rempah","EC (µS/cm)","600 - 1700",,,est
+86,"Chamomile","Rempah","Nitrogen (mg/kg)","60 - 175",,,est
+86,"Chamomile","Rempah","Fosfor (mg/kg)","25 - 78",,,est
+86,"Chamomile","Rempah","Kalium (mg/kg)","110 - 270",,,est
+87,"Ketumbar (Cilantro)","Rempah","pH","6 - 7.5",,,est
+87,"Ketumbar (Cilantro)","Rempah","Suhu (°C)","15 - 25",,,est
+87,"Ketumbar (Cilantro)","Rempah","Kelembaban (%)","40 - 68",,,est
+87,"Ketumbar (Cilantro)","Rempah","EC (µS/cm)","650 - 1800",,,est
+87,"Ketumbar (Cilantro)","Rempah","Nitrogen (mg/kg)","70 - 195",,,est
+87,"Ketumbar (Cilantro)","Rempah","Fosfor (mg/kg)","28 - 82",,,est
+87,"Ketumbar (Cilantro)","Rempah","Kalium (mg/kg)","120 - 280",,,est
+88,"Dill","Rempah","pH","5.8 - 7",,,est
+88,"Dill","Rempah","Suhu (°C)","15 - 25",,,est
+88,"Dill","Rempah","Kelembaban (%)","40 - 70",,,est
+88,"Dill","Rempah","EC (µS/cm)","650 - 1800",,,est
+88,"Dill","Rempah","Nitrogen (mg/kg)","70 - 195",,,est
+88,"Dill","Rempah","Fosfor (mg/kg)","28 - 82",,,est
+88,"Dill","Rempah","Kalium (mg/kg)","120 - 280",,,est
+89,"Adas (Fennel)","Rempah","pH","5.8 - 7.2",,,est
+89,"Adas (Fennel)","Rempah","Suhu (°C)","16 - 27",,,est
+89,"Adas (Fennel)","Rempah","Kelembaban (%)","40 - 68",,,est
+89,"Adas (Fennel)","Rempah","EC (µS/cm)","650 - 1800",,,est
+89,"Adas (Fennel)","Rempah","Nitrogen (mg/kg)","70 - 190",,,est
+89,"Adas (Fennel)","Rempah","Fosfor (mg/kg)","28 - 80",,,est
+89,"Adas (Fennel)","Rempah","Kalium (mg/kg)","125 - 285",,,est
+90,"Stevia","Rempah","pH","6 - 7.5",,,est
+90,"Stevia","Rempah","Suhu (°C)","18 - 30",,,est
+90,"Stevia","Rempah","Kelembaban (%)","45 - 72",,,est
+90,"Stevia","Rempah","EC (µS/cm)","650 - 1800",,,est
+90,"Stevia","Rempah","Nitrogen (mg/kg)","70 - 190",,,est
+90,"Stevia","Rempah","Fosfor (mg/kg)","28 - 82",,,est
+90,"Stevia","Rempah","Kalium (mg/kg)","120 - 280",,,est
+91,"Pandan","Rempah","pH","5.5 - 7",,,est
+91,"Pandan","Rempah","Suhu (°C)","22 - 33",,,est
+91,"Pandan","Rempah","Kelembaban (%)","55 - 82",,,est
+91,"Pandan","Rempah","EC (µS/cm)","700 - 1900",,,est
+91,"Pandan","Rempah","Nitrogen (mg/kg)","80 - 215",,,est
+91,"Pandan","Rempah","Fosfor (mg/kg)","30 - 88",,,est
+91,"Pandan","Rempah","Kalium (mg/kg)","130 - 300",,,est
+92,"Kayu Manis (Pot)","Rempah","pH","5.5 - 6.8",,,est
+92,"Kayu Manis (Pot)","Rempah","Suhu (°C)","20 - 30",,,est
+92,"Kayu Manis (Pot)","Rempah","Kelembaban (%)","45 - 72",,,est
+92,"Kayu Manis (Pot)","Rempah","EC (µS/cm)","700 - 1900",,,est
+92,"Kayu Manis (Pot)","Rempah","Nitrogen (mg/kg)","80 - 210",,,est
+92,"Kayu Manis (Pot)","Rempah","Fosfor (mg/kg)","30 - 88",,,est
+92,"Kayu Manis (Pot)","Rempah","Kalium (mg/kg)","135 - 310",,,est
+93,"Rosella","Rempah","pH","5.5 - 7",,,est
+93,"Rosella","Rempah","Suhu (°C)","20 - 32",,,est
+93,"Rosella","Rempah","Kelembaban (%)","40 - 70",,,est
+93,"Rosella","Rempah","EC (µS/cm)","650 - 1850",,,est
+93,"Rosella","Rempah","Nitrogen (mg/kg)","70 - 200",,,est
+93,"Rosella","Rempah","Fosfor (mg/kg)","28 - 88",,,est
+93,"Rosella","Rempah","Kalium (mg/kg)","130 - 310",,,est
+94,"Kumis Kucing","Rempah","pH","5.5 - 7",,,est
+94,"Kumis Kucing","Rempah","Suhu (°C)","20 - 31",,,est
+94,"Kumis Kucing","Rempah","Kelembaban (%)","45 - 72",,,est
+94,"Kumis Kucing","Rempah","EC (µS/cm)","650 - 1800",,,est
+94,"Kumis Kucing","Rempah","Nitrogen (mg/kg)","70 - 195",,,est
+94,"Kumis Kucing","Rempah","Fosfor (mg/kg)","28 - 85",,,est
+94,"Kumis Kucing","Rempah","Kalium (mg/kg)","125 - 290",,,est
+95,"Sambung Nyawa","Rempah","pH","5.5 - 7",,,est
+95,"Sambung Nyawa","Rempah","Suhu (°C)","21 - 32",,,est
+95,"Sambung Nyawa","Rempah","Kelembaban (%)","48 - 76",,,est
+95,"Sambung Nyawa","Rempah","EC (µS/cm)","680 - 1850",,,est
+95,"Sambung Nyawa","Rempah","Nitrogen (mg/kg)","75 - 205",,,est
+95,"Sambung Nyawa","Rempah","Fosfor (mg/kg)","28 - 88",,,est
+95,"Sambung Nyawa","Rempah","Kalium (mg/kg)","128 - 295",,,est
+96,"Salam","Rempah","pH","5.5 - 7",,,est
+96,"Salam","Rempah","Suhu (°C)","20 - 32",,,est
+96,"Salam","Rempah","Kelembaban (%)","40 - 70",,,est
+96,"Salam","Rempah","EC (µS/cm)","700 - 1900",,,est
+96,"Salam","Rempah","Nitrogen (mg/kg)","80 - 215",,,est
+96,"Salam","Rempah","Fosfor (mg/kg)","30 - 90",,,est
+96,"Salam","Rempah","Kalium (mg/kg)","135 - 310",,,est
+97,"Sirih","Rempah","pH","5.5 - 7",,,est
+97,"Sirih","Rempah","Suhu (°C)","20 - 33",,,est
+97,"Sirih","Rempah","Kelembaban (%)","50 - 78",,,est
+97,"Sirih","Rempah","EC (µS/cm)","700 - 1900",,,est
+97,"Sirih","Rempah","Nitrogen (mg/kg)","75 - 210",,,est
+97,"Sirih","Rempah","Fosfor (mg/kg)","28 - 88",,,est
+97,"Sirih","Rempah","Kalium (mg/kg)","130 - 300",,,est
+98,"Lidah Buat","Rempah","pH","5.5 - 7.5",,,est
+98,"Lidah Buat","Rempah","Suhu (°C)","18 - 35",,,est
+98,"Lidah Buat","Rempah","Kelembaban (%)","25 - 55",,,est
+98,"Lidah Buat","Rempah","EC (µS/cm)","550 - 1600",,,est
+98,"Lidah Buat","Rempah","Nitrogen (mg/kg)","50 - 150",,,est
+98,"Lidah Buat","Rempah","Fosfor (mg/kg)","22 - 72",,,est
+98,"Lidah Buat","Rempah","Kalium (mg/kg)","105 - 265",,,est
+99,"Ruku-Ruku (Kemangi Suci)","Rempah","pH","5.5 - 7",,,est
+99,"Ruku-Ruku (Kemangi Suci)","Rempah","Suhu (°C)","18 - 31",,,est
+99,"Ruku-Ruku (Kemangi Suci)","Rempah","Kelembaban (%)","42 - 70",,,est
+99,"Ruku-Ruku (Kemangi Suci)","Rempah","EC (µS/cm)","650 - 1850",,,est
+99,"Ruku-Ruku (Kemangi Suci)","Rempah","Nitrogen (mg/kg)","70 - 200",,,est
+99,"Ruku-Ruku (Kemangi Suci)","Rempah","Fosfor (mg/kg)","28 - 86",,,est
+99,"Ruku-Ruku (Kemangi Suci)","Rempah","Kalium (mg/kg)","125 - 295",,,est
+100,"Kenikir","Sayuran","pH","5.5 - 7",,,est
+100,"Kenikir","Sayuran","Suhu (°C)","20 - 31",,,est
+100,"Kenikir","Sayuran","Kelembaban (%)","45 - 72",,,est
+100,"Kenikir","Sayuran","EC (µS/cm)","650 - 1800",,,est
+100,"Kenikir","Sayuran","Nitrogen (mg/kg)","70 - 195",,,est
+100,"Kenikir","Sayuran","Fosfor (mg/kg)","28 - 85",,,est
+100,"Kenikir","Sayuran","Kalium (mg/kg)","125 - 290",,,est
