@@ -14,7 +14,7 @@
    - index.html & supabase-config.js = network-first (update selalu masuk),
      sisanya cache-first (cepat & offline).
    ===================================================================== */
-const CACHE = 'soilguard-v3-6-2';
+const CACHE = 'soilguard-v3-6-3';
 
 const PRECACHE = [
   './',

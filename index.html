@@ -903,7 +903,10 @@
     <script>
         // Tailwind
         function initTailwind() {
-            tailwind.config = { darkMode: 'class' };
+            // REVISI v3.6.2-fix: guard agar tidak crash bila Tailwind gagal dimuat
+            if (typeof tailwind !== 'undefined') {
+                tailwind.config = { darkMode: 'class' };
+            }
         }
 
         // =============== PLANT DATABASE ===============
@@ -1033,27 +1036,25 @@
 
         // =============== INIT ===============
         function initApp() {
-            initTailwind();
-            // REVISI v3.6.1 (FIX BUG): loadSettings HARUS sebelum initInputForm
-            // agar centangan tersimpan terbaca dulu, baru form dirender sesuai setelan
-            loadSettings();
-            initInputForm();
-            loadTheme();
-            loadHistory();
-            loadCustomLocations();
-            initAudio();
-            initElectronListeners();
-            // REVISI v3: bangun model ML offline + siapkan status jaringan & akun
+            // REVISI v3.6.2-fix: setiap init dibungkus try-catch agar satu error
+            // tidak mematikan seluruh aplikasi (menyebabkan tombol tidak berfungsi)
+            try { initTailwind(); } catch (e) { console.warn('initTailwind:', e); }
+            try { loadSettings(); } catch (e) { console.warn('loadSettings:', e); }
+            try { initInputForm(); } catch (e) { console.warn('initInputForm:', e); }
+            try { loadTheme(); } catch (e) { console.warn('loadTheme:', e); }
+            try { loadHistory(); } catch (e) { console.warn('loadHistory:', e); }
+            try { loadCustomLocations(); } catch (e) { console.warn('loadCustomLocations:', e); }
+            try { initAudio(); } catch (e) { console.warn('initAudio:', e); }
+            try { initElectronListeners(); } catch (e) { console.warn('initElectronListeners:', e); }
             try {
                 if (typeof SoilGuardML !== 'undefined') {
                     mlModel = SoilGuardML.buildModel(plantsDatabase);
                 }
             } catch (e) { console.warn('ML tidak aktif:', e); }
-            initNetworkStatus();
-            initAccount();
-            // REVISI v3.1: onboarding pertama kali + registrasi PWA
-            initOnboarding();
-            registerSW();
+            try { initNetworkStatus(); } catch (e) { console.warn('initNetworkStatus:', e); }
+            try { initAccount(); } catch (e) { console.warn('initAccount:', e); }
+            try { initOnboarding(); } catch (e) { console.warn('initOnboarding:', e); }
+            try { registerSW(); } catch (e) { console.warn('registerSW:', e); }
             
             // Set initial location
             const badge = document.getElementById('current-location-badge');
@@ -1355,6 +1356,8 @@
         function updateRadarChart(readings) {
             const ctx = document.getElementById('radar-chart');
             if (!ctx) return;
+            // REVISI v3.6.2-fix: guard agar tidak crash bila Chart.js belum termuat
+            if (typeof Chart === 'undefined') return;
             if (radarChartInstance) radarChartInstance.destroy();
 
             // REVISI: normalisasi relatif terhadap ZONA OPTIMAL UMUM (gabungan rentang
