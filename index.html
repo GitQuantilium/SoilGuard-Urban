@@ -1169,6 +1169,7 @@
                     </div>
                     <div class="flex items-center gap-x-2">
                         <input type="range" id="range-${field.id}" min="${field.min}" max="${field.max}" step="${field.step}" value="${field.default}" class="flex-1 accent-emerald-700" oninput="syncValue('${field.id}', this.value); validateField('${field.id}')">
+                        <input type="number" id="input-${field.id}" value="${field.default}" class="w-20 text-right border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 rounded-2xl px-2 py-1 text-sm font-semibold sensor-value" onchange="syncValue('${field.id}', this.value); validateField('${field.id}')">
                     </div>
                     <div id="error-${field.id}" class="text-[10px] text-red-500 h-3 mt-0.5"></div>
                 `;
