@@ -3334,24 +3334,58 @@
 
         let currentChart = null;
         function renderHistoryChart(type, btn = null) {
-            if (currentChart) currentChart.destroy();
+            // REVISI v3.6.2-fix: toggle .active pada tombol yang diklik
+            document.querySelectorAll('.stat-tab').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            else {
+                // jika dipanggil tanpa btn (dari setTimeout), cari tombol yang sesuai type
+                const btnMap = { line: 0, bar: 1, pie: 2, table: 3 };
+                const tabs = document.querySelectorAll('.stat-tab');
+                if (tabs[btnMap[type]]) tabs[btnMap[type]].classList.add('active');
+            }
+
             const container = document.getElementById('history-chart-container');
-            container.innerHTML = `<canvas id="history-chart" height="120"></canvas>`;
-            const canvas = document.getElementById('history-chart');
-            if (historyData.length < 2) { container.innerHTML = `<div class="text-center py-12 text-sm text-slate-400">${'Butuh minimal 2 data riwayat'}</div>`; return; }
+            if (currentChart) { currentChart.destroy(); currentChart = null; }
+
+            if (historyData.length < 2) {
+                container.innerHTML = `<div class="text-center py-12 text-sm text-slate-400">${T('hist_need2')}</div>`;
+                return;
+            }
             const sorted = [...historyData].reverse();
             const labels = sorted.map(e => new Date(e.date).toLocaleDateString([], {month:'short', day:'numeric'}));
             const scores = sorted.map(e => e.score);
+
+            if (type === 'table') {
+                // REVISI: table tidak pakai canvas, langsung render HTML dengan tinggi terbatas
+                container.innerHTML = `<div style="max-height:260px;overflow-y:auto;"><table class="w-full text-xs"><thead><tr style="position:sticky;top:0;background:inherit;"><th>Tanggal</th><th>Skor</th><th>Status</th><th>Tanaman</th></tr></thead><tbody>` +
+                    sorted.map(e => `<tr><td>${new Date(e.date).toLocaleDateString()}</td><td>${e.score}</td><td>${e.status}</td><td>${e.bestPlant}</td></tr>`).join('') +
+                    `</tbody></table></div>`;
+                return;
+            }
+
+            // Untuk line/bar/pie: render canvas dengan tinggi fix
+            container.innerHTML = `<div style="position:relative;height:260px;"><canvas id="history-chart"></canvas></div>`;
+            const canvas = document.getElementById('history-chart');
             const ctx = canvas.getContext('2d');
-            if (type === 'line') currentChart = new Chart(ctx, { type: 'line', data: { labels, datasets: [{ label: 'Skor', data: scores, borderColor: '#166534', tension: 0.3 }] }, options: { responsive: true, scales: { y: { min: 0, max: 100 } } } });
-            else if (type === 'bar') currentChart = new Chart(ctx, { type: 'bar', data: { labels, datasets: [{ label: 'Skor', data: scores, backgroundColor: '#166534' }] }, options: { responsive: true, scales: { y: { min: 0, max: 100 } } } });
-            else if (type === 'pie') {
-                const count = {}; sorted.forEach(e => count[e.bestPlant] = (count[e.bestPlant] || 0) + 1);
-                // REVISI: palet dinamis (dulu hanya 5 warna untuk tanaman yang bisa lebih banyak)
+
+            if (type === 'pie') {
+                const count = {}; sorted.forEach(e => { const bp = e.bestPlant || '-'; count[bp] = (count[bp] || 0) + 1; });
                 const palette = ['#166534', '#4ade80', '#eab308', '#f87171', '#64748b', '#0ea5e9', '#a855f7', '#f97316', '#14b8a6', '#e879f9'];
-                currentChart = new Chart(ctx, { type: 'pie', data: { labels: Object.keys(count), datasets: [{ data: Object.values(count), backgroundColor: Object.keys(count).map((_, i) => palette[i % palette.length]) }] } });
-            } else if (type === 'table') {
-                container.innerHTML = `<div class="overflow-auto"><table class="w-full text-xs"><thead><tr><th>Tanggal</th><th>Skor</th><th>Status</th><th>Tanaman</th></tr></thead><tbody>` + sorted.map(e => `<tr><td>${new Date(e.date).toLocaleDateString()}</td><td>${e.score}</td><td>${e.status}</td><td>${e.bestPlant}</td></tr>`).join('') + `</tbody></table></div>`;
+                currentChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: { labels: Object.keys(count), datasets: [{ data: Object.values(count), backgroundColor: Object.keys(count).map((_, i) => palette[i % palette.length]) }] },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 12, fontSize: 10 } } } }
+                });
+            } else {
+                const chartType = type === 'bar' ? 'bar' : 'line';
+                const ds = chartType === 'line'
+                    ? [{ label: 'Skor', data: scores, borderColor: '#166534', tension: 0.3, fill: false }]
+                    : [{ label: 'Skor', data: scores, backgroundColor: '#166534' }];
+                currentChart = new Chart(ctx, {
+                    type: chartType,
+                    data: { labels, datasets: ds },
+                    options: { responsive: true, maintainAspectRatio: false, scales: { y: { min: 0, max: 100 } } }
+                });
             }
         }
 
