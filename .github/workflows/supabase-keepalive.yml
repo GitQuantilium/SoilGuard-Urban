@@ -1,0 +1,76 @@
+# ============================================================================
+#  SUPABASE KEEP-ALIVE — mencegah project gratis SoilGuard ter-pause otomatis
+# ============================================================================
+#  Supabase paket gratis mem-pause project setelah ±7 hari TANPA AKTIVITAS
+#  database. Kalau project ter-pause: login gagal, data tidak termuat, dan
+#  sinkronisasi berhenti (data tidak hilang, tinggal di-Restore).
+#
+#  Workflow ini mengirim SATU query ringan ke database setiap hari supaya
+#  project dianggap aktif dan tidak ter-pause. Gratis untuk repo publik.
+#
+#  Catatan penting:
+#  1. Workflow terjadwal HANYA berjalan dari branch default (main).
+#  2. GitHub menonaktifkan jadwal otomatis bila repo tidak ada commit selama
+#     60 hari. Buka tab Actions -> "Supabase keep-alive" -> Enable workflow.
+#  3. Sebagai cadangan, bisa juga didaftarkan di cron-job.org / UptimeRobot
+#     (URL & anon key yang sama seperti di libs/supabase-config.js).
+#
+#  Anon key BUKAN rahasia (memang dirancang tampil di browser); keamanan data
+#  dijaga oleh Row Level Security di database. Jangan pernah memakai
+#  service_role key di sini.
+# ============================================================================
+
+name: Supabase keep-alive
+
+on:
+  schedule:
+    # Setiap hari pukul 01:17 UTC (08:17 WIB)
+    - cron: '17 1 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: supabase-keepalive
+  cancel-in-progress: false
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Ambil konfigurasi dari repo
+        uses: actions/checkout@v4
+
+      - name: Query ringan ke database Supabase
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          URL=$(grep -o 'url: "[^"]*"' libs/supabase-config.js | head -1 | cut -d'"' -f2 | sed 's:/*$::')
+          KEY=$(grep -o 'anonKey: "[^"]*"' libs/supabase-config.js | head -1 | cut -d'"' -f2)
+
+          if [ -z "$URL" ] || [ -z "$KEY" ]; then
+            echo "::error::Konfigurasi Supabase tidak ditemukan di libs/supabase-config.js"
+            exit 1
+          fi
+
+          echo "Menghubungi $URL ..."
+          code=$(curl -sS --max-time 30 -o /tmp/supabase-response.json -w '%{http_code}' \
+            -X POST "$URL/rest/v1/rpc/get_app_stats" \
+            -H "apikey: $KEY" \
+            -H "Authorization: Bearer $KEY" \
+            -H "Content-Type: application/json" \
+            -d '{}')
+
+          echo "HTTP $code"
+          head -c 400 /tmp/supabase-response.json 2>/dev/null || true
+          echo
+
+          if [ "$code" != "200" ]; then
+            echo "::error::Ping Supabase gagal (HTTP $code). Kalau 540/503, buka dashboard Supabase lalu klik Restore project."
+            exit 1
+          fi
+
+          echo "✅ Database merespons — project tetap aktif."
