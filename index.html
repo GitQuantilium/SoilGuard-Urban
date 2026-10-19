@@ -717,6 +717,9 @@
                 Buat project gratis di supabase.com, lalu isi <code>libs/supabase-config.js</code> &amp; jalankan SQL dari <b>PANDUAN-SUPABASE.md</b>. Sementara ini semua data tersimpan aman di perangkat ini saja.
             </div>
 
+            <!-- REVISI v3.6.3: deteksi project Supabase PAUSED / tidak merespons -->
+            <div id="acc-cloud-health" class="hidden mb-4 px-4 py-3 rounded-2xl text-xs leading-relaxed"></div>
+
             <!-- MODE BELUM LOGIN -->
             <div id="acc-auth-box">
                 <div class="text-xs text-slate-500 mb-3 leading-relaxed">Opsional! Tanpa login pun aplikasi berfungsi penuh &amp; data tersimpan lokal. Login hanya untuk <b>mengakses data yang sama dari perangkat lain</b>.</div>
@@ -2719,16 +2722,152 @@
             return sbConfigIssue() === null;
         }
 
+        // REVISI v3.6.3: deteksi & penjelasan khusus bila project Supabase PAUSED.
+        // Supabase free-tier mem-pause project setelah ±7 hari tanpa aktivitas;
+        // gejalanya: login gagal "Failed to fetch" / "Load failed", data tidak termuat.
+        function sbProjectRef() {
+            const m = String((typeof SUPABASE_CONFIG !== 'undefined' && SUPABASE_CONFIG.url) || '')
+                .match(/^https:\/\/([a-z0-9]+)\.supabase\.co/i);
+            return m ? m[1] : '';
+        }
+
+        function sbDashboardUrl() {
+            const ref = sbProjectRef();
+            return ref ? 'https://supabase.com/dashboard/project/' + ref : 'https://supabase.com/dashboard';
+        }
+
+        function sbPausedHelp() {
+            return '<b>Project Supabase sedang PAUSED (tidak aktif).</b><br>' +
+                'Project gratis Supabase otomatis di-pause setelah ±7 hari tanpa aktivitas. ' +
+                'Inilah sebabnya login &amp; sinkronisasi gagal — <b>data lamamu tidak hilang</b>.<br>' +
+                'Perbaikan (1 menit): buka <a href="' + sbDashboardUrl() + '" target="_blank" rel="noopener" class="underline font-bold">dashboard Supabase &rarr; Restore project</a>, ' +
+                'tunggu ±2 menit sampai status <i>Active</i>, lalu klik <b>Coba lagi</b> di bawah.';
+        }
+
+        function sbUnreachableHelp() {
+            if (!navigator.onLine) {
+                return '<b>Perangkat sedang offline.</b><br>Data tetap tersimpan aman di perangkat ini dan akan tersinkron otomatis saat internet kembali.';
+            }
+            return '<b>Server Supabase tidak merespons.</b><br>' +
+                'Kemungkinan terbesar: project sedang <b>PAUSED</b> (paket gratis pause otomatis setelah ±7 hari tanpa aktivitas), ' +
+                'atau koneksi ke supabase.co diblokir jaringan/sekolah.<br>' +
+                'Coba: buka <a href="' + sbDashboardUrl() + '" target="_blank" rel="noopener" class="underline font-bold">dashboard Supabase</a> ' +
+                '&rarr; klik <b>Restore project</b> bila statusnya <i>Paused</i>, lalu muat ulang aplikasi.';
+        }
+
         // Petunjuk ramah untuk error umum dari server Supabase
         function sbHint(err) {
             const m = String((err && err.message) || err || '');
+            const code = String((err && (err.code || err.statusCode)) || '');
+            const status = Number((err && err.status) || 0);
             if (/invalid path/i.test(m)) {
                 return '<br><b>Kemungkinan besar:</b> Project URL di libs/supabase-config.js salah format. Harus TEPAT seperti https://abcdefgh.supabase.co — tanpa /rest/v1, tanpa / di akhir, bukan link dashboard. Setelah diperbaiki, refresh aplikasi (Ctrl+Shift+R).';
             }
-            if (/invalid api key/i.test(m)) {
-                return '<br><b>Kemungkinan besar:</b> anonKey salah salin. Salin kunci "anon public" dari Supabase > Project Settings > API.';
+            if (/invalid api key|invalid jwt|jwt.*(invalid|expired)/i.test(m)) {
+                return '<br><b>Kemungkinan besar:</b> anonKey salah salin. Salin kunci "anon public" dari Supabase &gt; Project Settings &gt; API Keys.';
+            }
+            if (status === 540 || /project.*(paused|suspend)|paused project/i.test(m)) {
+                return '<br>' + sbPausedHelp();
+            }
+            if (code === '42P01' || /relation "?public\.[a-z_]+"? does not exist/i.test(m)) {
+                return '<br><b>Schema database belum lengkap.</b> Jalankan SQL di <b>PANDUAN-SUPABASE.md</b> (langkah 2, 2b, 2c) pada project Supabase yang dipakai, lalu coba lagi.';
+            }
+            if (code === 'PGRST202' || /could not find the function/i.test(m)) {
+                return '<br><b>Fungsi statistik belum ada.</b> Jalankan SQL <b>langkah 2b</b> di PANDUAN-SUPABASE.md.';
+            }
+            if (code === '42501' || /permission denied|row-level security/i.test(m)) {
+                return '<br><b>Izin database ditolak.</b> Pastikan SQL langkah 2 (tabel + kebijakan RLS) sudah dijalankan di project ini.';
+            }
+            if (/failed to fetch|load failed|networkerror|network request failed|fetch failed/i.test(m)) {
+                return '<br>' + sbUnreachableHelp();
             }
             return '';
+        }
+
+        // ---- Probe ringan: bedakan "PAUSED / tidak terjangkau" dari error biasa ----
+        let sbCloudProbe = null;
+        async function sbProbeCloud(force) {
+            if (sbCloudProbe && !force && (Date.now() - sbCloudProbe.at) < 60000) return sbCloudProbe;
+            const url = String((typeof SUPABASE_CONFIG !== 'undefined' && SUPABASE_CONFIG.url) || '').trim().replace(/\/+$/, '');
+            const key = String((typeof SUPABASE_CONFIG !== 'undefined' && SUPABASE_CONFIG.anonKey) || '').trim();
+            const r = { at: Date.now(), state: 'unknown', detail: '' };
+            const done = () => { sbCloudProbe = r; return r; };
+            if (!url || !key) { r.state = 'unconfigured'; return done(); }
+
+            // 1) Cek cepat endpoint auth (tidak menyentuh tabel apa pun)
+            const ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+            const timer = ctrl ? setTimeout(() => ctrl.abort(), 8000) : null;
+            try {
+                const res = await fetch(url + '/auth/v1/health', {
+                    headers: { apikey: key, Authorization: 'Bearer ' + key },
+                    signal: ctrl ? ctrl.signal : undefined
+                });
+                if (res.ok) { r.state = 'ok'; return done(); }
+                if (res.status === 540 || res.status === 503 || res.status === 502 || res.status === 504) {
+                    r.state = 'paused'; r.detail = 'HTTP ' + res.status; return done();
+                }
+                r.detail = 'HTTP ' + res.status; // lanjut cek lewat REST di bawah
+            } catch (e) {
+                r.detail = String((e && e.message) || e);
+            } finally {
+                if (timer) clearTimeout(timer);
+            }
+
+            // 2) Fallback: query ringan lewat klien Supabase (benar-benar menyentuh database)
+            const client = sbInit();
+            if (client) {
+                try {
+                    const { error } = await client.from('sensor_bridge')
+                        .select('id', { head: true, count: 'exact' }).limit(1);
+                    if (!error) { r.state = 'ok'; return done(); }
+                    const code = String(error.code || '');
+                    const msg = String(error.message || '');
+                    if (code === '42P01' || code === 'PGRST205' || /relation .* does not exist|could not find the table/i.test(msg)) {
+                        r.state = 'schema'; r.detail = msg; return done();
+                    }
+                    if (/failed to fetch|load failed|network/i.test(msg)) {
+                        r.state = navigator.onLine ? 'unreachable' : 'offline'; r.detail = msg; return done();
+                    }
+                    r.state = 'error'; r.detail = msg; return done();
+                } catch (e) {
+                    r.state = navigator.onLine ? 'unreachable' : 'offline';
+                    r.detail = String((e && e.message) || e);
+                    return done();
+                }
+            }
+
+            r.state = navigator.onLine ? 'unreachable' : 'offline';
+            return done();
+        }
+
+        // Tampilkan banner status cloud di modal Akun (hanya jika ada masalah)
+        async function refreshCloudHealth(force) {
+            const box = document.getElementById('acc-cloud-health');
+            if (!box) return;
+            if (!sbConfigured()) { box.classList.add('hidden'); box.innerHTML = ''; return; }
+            box.classList.remove('hidden');
+            box.className = 'mb-4 px-4 py-3 rounded-2xl text-xs leading-relaxed bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300';
+            box.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Memeriksa koneksi ke database cloud...';
+            const p = await sbProbeCloud(force);
+            if (p.state === 'ok') {
+                box.classList.add('hidden');
+                box.innerHTML = '';
+                return;
+            }
+            const retry = '<button onclick="refreshCloudHealth(true)" class="mt-2 inline-flex items-center gap-x-1.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-3 py-1.5 rounded-xl"><i class="fa-solid fa-rotate"></i> Coba lagi</button>';
+            if (p.state === 'paused') {
+                box.className = 'mb-4 px-4 py-3 rounded-2xl text-xs leading-relaxed bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-200 border border-red-200 dark:border-red-800';
+                box.innerHTML = sbPausedHelp() + retry;
+            } else if (p.state === 'offline') {
+                box.className = 'mb-4 px-4 py-3 rounded-2xl text-xs leading-relaxed bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-200 border border-amber-200';
+                box.innerHTML = sbUnreachableHelp() + retry;
+            } else if (p.state === 'schema') {
+                box.className = 'mb-4 px-4 py-3 rounded-2xl text-xs leading-relaxed bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-200 border border-red-200 dark:border-red-800';
+                box.innerHTML = '<b>Database cloud aktif, tetapi tabelnya belum ada.</b><br>Jalankan SQL <b>langkah 2, 2b, dan 2c</b> di <b>PANDUAN-SUPABASE.md</b> pada project Supabase ini, lalu klik <b>Coba lagi</b>.' + retry;
+            } else {
+                box.className = 'mb-4 px-4 py-3 rounded-2xl text-xs leading-relaxed bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-200 border border-red-200 dark:border-red-800';
+                box.innerHTML = (p.state === 'unreachable' ? sbUnreachableHelp() : '<b>Database cloud menolak koneksi</b> (' + p.detail + '). Periksa konfigurasi Supabase.') + retry;
+            }
         }
 
         function sbInit() {
@@ -2772,6 +2911,7 @@
             document.getElementById('acc-msg').classList.add('hidden');
             updateAccountUI();
             updateSyncStatusUI();
+            refreshCloudHealth(true);
             fetchAppStats();
         }
 
@@ -2845,7 +2985,7 @@
                 const { error } = await client.auth.signInWithPassword({ email, password: pass });
                 if (error) throw error;
                 // onAuthStateChange akan memperbarui UI & memicu sinkron
-            } catch (err) { accMsg('Gagal masuk: ' + (err.message || err) + sbHint(err), 'err'); }
+            } catch (err) { accMsg('Gagal masuk: ' + (err.message || err) + sbHint(err), 'err'); refreshCloudHealth(true); }
         }
 
         async function accountSignUp() {
@@ -2878,7 +3018,7 @@
                 const { error } = await client.auth.resetPasswordForEmail(email);
                 if (error) throw error;
                 accMsg('Email reset dikirim (cek inbox/spam).', 'ok');
-            } catch (err) { accMsg('Gagal: ' + (err.message || err), 'err'); }
+            } catch (err) { accMsg('Gagal: ' + (err.message || err) + sbHint(err), 'err'); refreshCloudHealth(true); }
         }
 
         async function accountSignOut() {
@@ -3100,7 +3240,7 @@
         function exportBackup() {
             const data = {
                 app: 'SoilGuard Urban',
-                version: '3.6.2',
+                version: '3.6.3',
                 exported_at: new Date().toISOString(),
                 history: JSON.parse(localStorage.getItem('soilHistory') || '[]'),
                 customLocations: JSON.parse(localStorage.getItem('soilguard-custom-locations') || '[]'),
@@ -3219,7 +3359,7 @@
                     (avg.ph != null ? '<br>Rerata komunitas: pH ' + Number(avg.ph).toFixed(1) + ' &bull; suhu ' + Number(avg.temp).toFixed(1) + '&deg;C &bull; lembab ' + Number(avg.moist).toFixed(0) + '% &bull; skor ' + Number(avg.score).toFixed(0) + '%' : '') +
                     (top ? '<br>Tanaman terpopuler (komunitas): <b>' + top + '</b>' : '');
             } catch (e) {
-                box.innerHTML = 'Statistik belum tersedia &mdash; jalankan SQL <b>langkah 2b</b> di PANDUAN-SUPABASE.md, lalu buka ulang modal ini.';
+                box.innerHTML = 'Statistik belum tersedia &mdash; jalankan SQL <b>langkah 2b</b> di PANDUAN-SUPABASE.md, lalu buka ulang modal ini.' + sbHint(e);
             }
         }
 

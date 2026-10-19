@@ -1,4 +1,4 @@
-# 🌱 SoilGuard Urban v3.6.2
+# 🌱 SoilGuard Urban v3.6.3
 
 **Sistem Monitoring Multi-Parameter Tanah Urban — Mesin Hybrid (Rule-based + Machine Learning) • Offline-First • PWA Android/iOS • Sensor Bluetooth LE / USB / WiFi-Cloud • Sinkronisasi PostgreSQL Opsional**
 
@@ -94,6 +94,9 @@ npm start
 **Host + install ke HP:** lihat `HOSTING-INSTALL-HP.md` (Netlify Drop ± 3 menit
 atau GitHub Pages).
 **Aktifkan akun & sinkronisasi:** lihat `PANDUAN-SUPABASE.md` (± 10 menit, gratis).
+**Kalau login/data tiba-tiba tidak termuat:** kemungkinan project Supabase **PAUSED**
+(kebijakan paket gratis) — lihat `PANDUAN-SUPABASE.md` bagian **6** untuk Restore.
+Keep-alive otomatis: `.github/workflows/supabase-keepalive.yml`.
 
 ## 🧮 Metode (ringkas)
 
@@ -118,13 +121,14 @@ soilguard-app/
 ├── preload.js              ← jembatan aman Electron
 ├── ml-evaluasi.js          ← ukur ulang metrik ML (node ml-evaluasi.js)
 ├── manifest.json / sw.js   ← PWA (installable + cache offline)
-├── package.json            ← v3.6.2
+├── package.json            ← v3.6.3
 ├── assets/                 ← ikon (png/ico/icns + icon-192/512 + apple-touch-icon)
 ├── PANDUAN-SUPABASE.md     ← setup akun/sync/statistik (SQL 2, 2b, 2c, batas email)
 ├── HOSTING-INSTALL-HP.md   ← hosting + install PWA ke Android/iOS
 ├── ALAT-BLUETOOTH.md       ← protokol BLE/bridge + firmware contoh ESP32
 ├── UJI-DATA-KTI.md         ← worksheet uji black-box/lapangan/angket
 ├── validasi-rentang-est.csv← checklist validasi 73 rentang estimasi
+├── .github/workflows/      ← keep-alive Supabase harian (anti auto-pause)
 └── libs/                   ← pustaka lokal offline: tailwind, chart.js, jspdf (+autotable),
                               fontawesome, font, supabase.js, supabase-config.js,
                               soilguard-ml.js (100 tanaman + ML), soilguard-sync.js

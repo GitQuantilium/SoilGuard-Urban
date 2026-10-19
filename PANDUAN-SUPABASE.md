@@ -215,6 +215,7 @@ Perbaikannya 1 menit:
 | Masalah | Solusi |
 |---|---|
 | "Sync cloud belum dikonfigurasi" | `libs/supabase-config.js` masih berisi kata GANTI |
+| **Login gagal / data tidak termuat tiba-tiba** ("Failed to fetch", "Load failed", spinner terus) | Kemungkinan besar **project PAUSED** — lihat bagian **6** di bawah |
 | "Invalid API key" | Salin ulang **anon public key** (bukan service_role) |
 | **"Invalid path specified in request URL"** saat daftar/masuk | `url` di `supabase-config.js` salah format. Harus TEPAT seperti `https://abcdefgh.supabase.co` — TANPA `/rest/v1`, TANPA `/` di akhir, dan BUKAN link dashboard (`supabase.com/dashboard/...`). Salin dari **Project Settings → API → Project URL**, simpan, lalu refresh aplikasi (Ctrl+Shift+R) |
 | Email verifikasi diminta terus | Supabase → Authentication → Providers → Email; matikan "Confirm email" untuk demo sekolah, ATAU verifikasi email dulu |
@@ -223,3 +224,44 @@ Perbaikannya 1 menit:
 | Ganti project Supabase | Cukup ganti URL/key; data lama di cloud lama tidak ikut pindah otomatis |
 | Statistik di modal Akun bilang "belum tersedia" | SQL langkah **2b** belum di-Run |
 | "Email rate limit exceeded" saat daftar | Lihat bagian **4b**: matikan Confirm email atau pasang SMTP sendiri |
+
+## 6. Project "PAUSED" — kenapa login & data tiba-tiba tidak bisa dibuka?
+
+**Gejala:** sebelumnya aplikasi normal, lalu suatu hari tombol **Masuk** gagal
+("Failed to fetch" / "Load failed"), daftar akun tidak muncul, dan sinkronisasi
+berhenti. Aplikasi offline tetap jalan; hanya fitur cloud yang mati.
+
+**Penyebab:** Supabase **paket gratis** otomatis **mem-pause project setelah ±7 hari
+tanpa aktivitas database**. Ini kebijakan Supabase, bukan bug aplikasi.
+**Data tidak hilang** — begitu project di-Restore, akun & data kembali seperti semula.
+
+**Cara mengaktifkan lagi (1 menit):**
+1. Buka <https://supabase.com/dashboard> → pilih project **SoilGuard**
+   (atau langsung: <https://supabase.com/dashboard/project/etcnqoczbahpyinpdkar>).
+2. Klik tombol **Restore project** (kadang muncul sebagai banner *Project is paused*).
+3. Tunggu ±2 menit sampai status **Active / Healthy**.
+4. Buka aplikasi → **Ctrl+Shift+R** (muat ulang) → coba login/sinkron lagi.
+
+Mulai v3.6.3, aplikasi mendeteksi kondisi ini dan menampilkan tombol
+**Coba lagi** + tautan langsung ke dashboard, bukan pesan error yang membingungkan.
+
+### 6b. Supaya tidak ter-pause lagi
+
+Repo ini sudah menyertakan workflow
+**`.github/workflows/supabase-keepalive.yml`** yang mengirim satu query ringan
+ke database **setiap hari** (pukul 08:17 WIB). Query itu membuat project dianggap
+aktif sehingga tidak di-pause.
+
+Yang perlu diketahui:
+- Workflow terjadwal hanya berjalan dari branch **main** (setelah file ini ada di main).
+- GitHub mematikan jadwal otomatis jika repo **tidak ada commit selama 60 hari**.
+  Kalau itu terjadi: tab **Actions** → **Supabase keep-alive** → **Enable workflow**.
+- Bisa dijalankan manual kapan saja: tab **Actions** → **Supabase keep-alive** →
+  **Run workflow**.
+- Cadangan eksternal (opsional): daftarkan URL
+  `https://etcnqoczbahpyinpdkar.supabase.co/rest/v1/rpc/get_app_stats`
+  (POST, header `apikey` = anon key dari `libs/supabase-config.js`) di
+  cron-job.org atau UptimeRobot, sekali sehari.
+- Kalau butuh project yang **tidak pernah pause**, Supabase Pro (berbayar)
+  menghilangkan auto-pause. Untuk kebutuhan KTI, keep-alive gratis ini sudah cukup.
+
