@@ -210,6 +210,28 @@ Perbaikannya 1 menit:
 > `auth.users` Supabase (user_id). Ganti provider = migrasi seluruh skema & data.
 > Untuk skala 5–30 pengguna, Solusi 1/2 jauh lebih masuk akal.
 
+## 4c. Reset Password — "klik link di email malah 404 / halaman kosong"
+
+Sejak **v3.6.4** aplikasi mengirim `redirectTo` sendiri (alamat halaman yang sedang
+dipakai), jadi link di email selalu kembali ke aplikasi — bukan ke Site URL project.
+Supaya diizinkan Supabase, alamat itu WAJIB terdaftar:
+
+1. Dashboard Supabase → **Authentication → URL Configuration**
+2. **Site URL** = alamat aplikasi yang dipakai sehari-hari
+   (mis. `https://gitquantilium.github.io/SoilGuard-Urban/`)
+3. **Redirect URLs** → Add URL, tambahkan:
+   - `https://gitquantilium.github.io/SoilGuard-Urban/**`
+   - (`https://*.netlify.app/**` dan `http://localhost:8000/**` bila dipakai saat mengembangkan)
+4. Simpan, lalu tes: modal **Akun** → isi email → **Lupa password?** → buka email →
+   klik **Reset password** → aplikasi terbuka di form **Password baru**.
+
+Catatan:
+- Link reset **sekali pakai** dan berlaku **±1 jam**. Kalau sudah dipakai/kedaluwarsa,
+  aplikasi menampilkan pesan jelas — minta link baru lewat tombol **Lupa password?**.
+- Halaman `github.io` yang muncul "There isn't a GitHub Pages site here" berarti
+  **GitHub Pages-nya belum diaktifkan** (Settings → Pages → Deploy from a branch →
+  `main` / `(root)` → Save), bukan bug aplikasi.
+
 ## 5. Masalah Umum
 
 | Masalah | Solusi |
@@ -224,6 +246,8 @@ Perbaikannya 1 menit:
 | Ganti project Supabase | Cukup ganti URL/key; data lama di cloud lama tidak ikut pindah otomatis |
 | Statistik di modal Akun bilang "belum tersedia" | SQL langkah **2b** belum di-Run |
 | "Email rate limit exceeded" saat daftar | Lihat bagian **4b**: matikan Confirm email atau pasang SMTP sendiri |
+| **Klik link reset password → 404 / layar kosong** | Site URL & Redirect URLs belum benar — lihat bagian **4c** |
+| Form password baru tidak muncul setelah klik link | Link sudah dipakai/kedaluwarsa (±1 jam) — minta link baru lewat **Lupa password?** |
 
 ## 6. Project "PAUSED" — kenapa login & data tiba-tiba tidak bisa dibuka?
 
