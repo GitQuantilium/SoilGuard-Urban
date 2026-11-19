@@ -748,6 +748,25 @@
                 <button onclick="accountSignOut()" class="w-full border border-red-200 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 font-bold py-2.5 rounded-2xl">Keluar (Data lokal tetap aman)</button>
             </div>
 
+            <!-- REVISI v3.6.4: MODE BUAT PASSWORD BARU (dibuka dari link email reset) -->
+            <div id="acc-recovery-box" class="hidden">
+                <div class="text-xs text-slate-500 dark:text-slate-400 mb-3 leading-relaxed">
+                    Link reset password valid. Buat password baru untuk
+                    <b id="acc-recovery-email">akun ini</b>.
+                </div>
+                <label class="font-semibold text-sm block mb-1">Password baru</label>
+                <input aria-label="Password baru" type="password" id="acc-new-pass" autocomplete="new-password"
+                       placeholder="minimal 6 karakter"
+                       class="w-full border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 px-3 py-2 rounded-2xl text-sm mb-3">
+                <label class="font-semibold text-sm block mb-1">Ulangi password baru</label>
+                <input aria-label="Ulangi password baru" type="password" id="acc-new-pass2" autocomplete="new-password"
+                       placeholder="ketik ulang password"
+                       onkeydown="accNewPassKey(event)"
+                       class="w-full border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 px-3 py-2 rounded-2xl text-sm mb-4">
+                <button onclick="accountSaveNewPassword()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-2xl mb-2">Simpan Password Baru</button>
+                <button onclick="cancelRecovery()" class="w-full text-xs text-slate-500 hover:text-emerald-700 py-1">Batal (keluar dari mode reset)</button>
+            </div>
+
             <!-- Status operasi -->
             <div id="acc-msg" class="hidden mt-3 px-4 py-3 rounded-2xl text-xs leading-relaxed"></div>
 
@@ -911,6 +930,17 @@
                 tailwind.config = { darkMode: 'class' };
             }
         }
+
+        // ==== REVISI v3.6.4: simpan parameter URL SEBELUM supabase-js memprosesnya ====
+        // Link reset password Supabase datang sebagai "#access_token=...&type=recovery".
+        // GoTrue otomatis menghapus hash itu saat inisialisasi, jadi harus dibaca dulu.
+        const SB_AUTH_URL = (function () {
+            try {
+                const raw = String(location.hash || '').replace(/^#/, '') + '&' +
+                            String(location.search || '').replace(/^\?/, '');
+                return new URLSearchParams(raw);
+            } catch (e) { return new URLSearchParams(''); }
+        })();
 
         // =============== PLANT DATABASE ===============
         const plantsDatabase = [
@@ -2941,8 +2971,10 @@
                 warnBox.innerHTML = '<b>Sync cloud belum siap: </b>' + issue +
                     '<br>Perbaiki <code>libs/supabase-config.js</code> lalu refresh aplikasi (Ctrl+Shift+R). Fitur offline tetap jalan normal.';
             }
-            document.getElementById('acc-auth-box').classList.toggle('hidden', !!sbUser);
-            document.getElementById('acc-user-box').classList.toggle('hidden', !sbUser);
+            document.getElementById('acc-auth-box').classList.toggle('hidden', !!sbUser || recoveryMode);
+            document.getElementById('acc-user-box').classList.toggle('hidden', !sbUser || recoveryMode);
+            const recBox = document.getElementById('acc-recovery-box');
+            if (recBox) recBox.classList.toggle('hidden', !recoveryMode);
             const label = document.getElementById('account-btn-label');
             const icon = document.getElementById('account-icon');
             if (sbUser) {
@@ -3009,16 +3041,96 @@
             }
         }
 
+        // Alamat halaman aplikasi yang SEDANG dipakai (bukan Site URL Supabase),
+        // supaya link di email kembali ke halaman ini - termasuk saat dibuka dari
+        // GitHub Pages, Netlify, atau localhost.
+        function sbRedirectUrl() {
+            return location.origin + location.pathname;
+        }
+
         async function accountResetPass() {
             const client = sbInit();
             if (!client) { accMsg('Sync cloud belum dikonfigurasi. Lihat <b>PANDUAN-SUPABASE.md</b>.', 'err'); return; }
+            if (location.protocol === 'file:') {
+                accMsg('Reset password hanya bisa dari versi web (https/http), bukan dari file yang dibuka langsung di komputer.', 'err');
+                return;
+            }
             const email = document.getElementById('acc-email').value.trim();
             if (!email) { accMsg('Isi email kamu dulu di kolom email.', 'err'); return; }
             try {
-                const { error } = await client.auth.resetPasswordForEmail(email);
+                const { error } = await client.auth.resetPasswordForEmail(email, { redirectTo: sbRedirectUrl() });
                 if (error) throw error;
-                accMsg('Email reset dikirim (cek inbox/spam).', 'ok');
-            } catch (err) { accMsg('Gagal: ' + (err.message || err) + sbHint(err), 'err'); refreshCloudHealth(true); }
+                accMsg('Email reset dikirim (cek inbox/spam). Buka link-nya di browser yang sama.', 'ok');
+            } catch (err) {
+                const m = String((err && err.message) || err);
+                if (/redirect|not allowed|whitelist/i.test(m)) {
+                    accMsg('<b>Alamat aplikasi ini belum diizinkan Supabase.</b><br>Tambahkan <code>' + sbRedirectUrl() + '</code> di Supabase &rarr; Authentication &rarr; URL Configuration &rarr; Redirect URLs.', 'err');
+                } else {
+                    accMsg('Gagal: ' + m + sbHint(err), 'err');
+                }
+                refreshCloudHealth(true);
+            }
+        }
+
+        // ==== REVISI v3.6.4: ALUR RESET PASSWORD ====
+        // 1) user klik "Lupa password" -> Supabase kirim email berisi link
+        // 2) link membawa "#access_token=...&type=recovery" -> GoTrue memicu PASSWORD_RECOVERY
+        // 3) aplikasi menampilkan form password baru -> updateUser({ password })
+        let recoveryMode = false;
+
+        function enterRecoveryMode() {
+            recoveryMode = true;
+            const p1 = document.getElementById('acc-new-pass');
+            const p2 = document.getElementById('acc-new-pass2');
+            if (p1) p1.value = '';
+            if (p2) p2.value = '';
+            const emailEl = document.getElementById('acc-recovery-email');
+            if (emailEl) emailEl.textContent = (sbUser && sbUser.email) ? sbUser.email : 'akun ini';
+            showAccountModal();
+            setTimeout(function () {
+                const inp = document.getElementById('acc-new-pass');
+                if (inp) { try { inp.focus(); } catch (e) {} }
+            }, 80);
+        }
+
+        function cancelRecovery() {
+            recoveryMode = false;
+            try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+            updateAccountUI();
+            accMsg('Mode reset password dibatalkan. Kamu tetap masuk seperti sebelumnya.', 'info');
+        }
+
+        // Enter di kolom "ulangi password" = simpan
+        function accNewPassKey(e) {
+            if (e && e.key === 'Enter') accountSaveNewPassword();
+        }
+
+        async function accountSaveNewPassword() {
+            const client = sbInit();
+            if (!client || !recoveryMode) { accMsg('Sesi reset tidak aktif. Minta link baru lewat tombol <b>Lupa password?</b>.', 'err'); return; }
+            const p1 = document.getElementById('acc-new-pass').value;
+            const p2 = document.getElementById('acc-new-pass2').value;
+            if (p1.length < 6) { accMsg('Password minimal 6 karakter.', 'err'); return; }
+            if (p1 !== p2) { accMsg('Dua password yang diketik belum sama.', 'err'); return; }
+            accMsg('Menyimpan password baru...', 'info');
+            try {
+                const { error } = await client.auth.updateUser({ password: p1 });
+                if (error) throw error;
+                recoveryMode = false;
+                try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+                document.getElementById('acc-new-pass').value = '';
+                document.getElementById('acc-new-pass2').value = '';
+                updateAccountUI();
+                accMsg('Password berhasil diganti. Kamu sudah masuk dengan password baru.', 'ok');
+                if (sbUser) syncNow(true);
+            } catch (err) {
+                const m = String((err && err.message) || err);
+                if (/expired|invalid|session|jwt/i.test(m)) {
+                    accMsg('<b>Link reset sudah kedaluwarsa atau sudah dipakai.</b><br>Link hanya berlaku sekali dan maksimal 1 jam. Isi emailmu di atas lalu klik <b>Lupa password?</b> untuk minta link baru.', 'err');
+                } else {
+                    accMsg('Gagal menyimpan password: ' + m, 'err');
+                }
+            }
         }
 
         async function accountSignOut() {
@@ -3075,7 +3187,7 @@
                 }
             } catch (err) {
                 console.error(err);
-                accMsg('Sinkron gagal: ' + ((err.message || err) + ' ') + ' Data lokal tetap aman — coba lagi saat koneksi stabil.' + sbHint(err), 'err');
+                if (!silent) accMsg('Sinkron gagal: ' + ((err.message || err) + ' ') + ' Data lokal tetap aman — coba lagi saat koneksi stabil.' + sbHint(err), 'err');
             } finally {
                 syncingNow = false;
                 if (btn) { btn.disabled = false; const s = btn.querySelector('span'); if (s) s.textContent = 'Sinkronkan Sekarang'; }
@@ -3240,7 +3352,7 @@
         function exportBackup() {
             const data = {
                 app: 'SoilGuard Urban',
-                version: '3.6.3',
+                version: '3.6.4',
                 exported_at: new Date().toISOString(),
                 history: JSON.parse(localStorage.getItem('soilHistory') || '[]'),
                 customLocations: JSON.parse(localStorage.getItem('soilguard-custom-locations') || '[]'),
@@ -3295,19 +3407,40 @@
             const client = sbInit();
             updateAccountUI();
             if (!client) return;
+
+            // Link reset yang sudah kedaluwarsa / sudah dipakai (Supabase mengirim
+            // error ini di hash URL, bukan di query string).
+            const urlErr = (SB_AUTH_URL.get('error_code') || '') + ' ' + (SB_AUTH_URL.get('error_description') || '');
+            if (/otp_expired|access_denied|invalid/i.test(urlErr)) {
+                showAccountModal();
+                accMsg('<b>Link reset password tidak berlaku.</b><br>Link hanya bisa dipakai sekali dan maksimal 1 jam. Minta link baru: isi email di atas, lalu klik <b>Lupa password?</b>.', 'err');
+                try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+            }
+
+            // Dengarkan SEBELUM getSession(): GoTrue sudah memproses URL saat client
+            // dibuat, jadi listener yang dipasang belakangan bisa melewatkan event
+            // PASSWORD_RECOVERY (bug yang membuat link reset berhenti di halaman kosong).
+            client.auth.onAuthStateChange((event, session) => {
+                sbUser = (session && session.user) ? session.user : null;
+                if (event === 'PASSWORD_RECOVERY') {
+                    enterRecoveryMode();
+                    return;
+                }
+                updateAccountUI();
+                if (event === 'SIGNED_IN' && sbUser && !recoveryMode) syncNow(true);
+            });
+
             try {
                 const { data } = await client.auth.getSession();
                 if (data && data.session && data.session.user) {
                     sbUser = data.session.user;
                     updateAccountUI();
-                    syncNow(true); // sinkron senyap saat aplikasi dibuka
+                    if (!recoveryMode) syncNow(true); // sinkron senyap saat aplikasi dibuka
                 }
-                client.auth.onAuthStateChange((event, session) => {
-                    sbUser = (session && session.user) ? session.user : null;
-                    updateAccountUI();
-                    if (event === 'SIGNED_IN' && sbUser) syncNow(true);
-                });
             } catch (e) { console.warn('Sesi akun tidak dimuat:', e); }
+
+            // Cadangan: kalau event PASSWORD_RECOVERY sudah lewat sebelum listener siap.
+            if (SB_AUTH_URL.get('type') === 'recovery' && !recoveryMode) enterRecoveryMode();
         }
 
         // ---- REVISI v3.2: KONTRIBUSI DATA ANONIM (crowdsourced, opt-in) ----
